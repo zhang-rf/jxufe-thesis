@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            credentials {
+                username "albus"
+                password "YouCantHitMe"
+            }
+            url "http://139.196.34.70:8081/content/groups/public/"
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+allprojects {
+    group "cn.jxufe"
+    version "1.0-SNAPSHOT"
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+
+    repositories {
+        mavenCentral()
+        maven {
+            credentials {
+                username "albus"
+                password "YouCantHitMe"
+            }
+            url "http://139.196.34.70:8081/content/groups/public/"
+        }
+    }
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.encoding = "UTF-8"
+    }
+
+    compileTestJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.encoding = 'UTF-8'
+    }
+}
