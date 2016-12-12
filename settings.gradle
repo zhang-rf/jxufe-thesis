@@ -1,3 +1,6 @@
 rootProject.name = 'jxufe-thesis'
 
 include "thesis-centre"
+include 'thesis-interface'
+include 'thesis-client'
+

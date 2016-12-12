@@ -13,7 +13,6 @@ public class CentreApplication {
 
     public static void main(String[] args) throws IOException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(CentreApplication.class, args);
-        while (true)
-            System.in.read();
+        applicationContext.getBean(cn.jxufe.interfaces.Consumer.class).invoke(null, null);
     }
 }

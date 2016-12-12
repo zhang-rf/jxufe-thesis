@@ -1,6 +1,8 @@
 buildscript {
     repositories {
-        mavenCentral()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
         maven {
             credentials {
                 username "albus"
@@ -8,10 +10,11 @@ buildscript {
             }
             url "http://139.196.34.70:8081/content/groups/public/"
         }
+        mavenCentral()
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE"
     }
 }
 
@@ -25,7 +28,9 @@ subprojects {
     apply plugin: "org.springframework.boot"
 
     repositories {
-        mavenCentral()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
         maven {
             credentials {
                 username "albus"
@@ -33,11 +38,12 @@ subprojects {
             }
             url "http://139.196.34.70:8081/content/groups/public/"
         }
+        mavenCentral()
     }
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter")
-        testCompile("org.springframework.boot:spring-boot-starter-test")
+        compile "org.springframework.boot:spring-boot-starter"
+        testCompile "org.springframework.boot:spring-boot-starter-test"
     }
 
     compileJava {
@@ -50,5 +56,18 @@ subprojects {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
         options.encoding = 'UTF-8'
+    }
+}
+
+configure([project("thesis-centre"), project("thesis-client")]) {
+    dependencies {
+        compile("com.github.sgroschupf:zkclient:0.1") {
+            exclude module: "jmxtools"
+            exclude module: "jmxri"
+        }
+        compile("com.alibaba:dubbo:2.5.3") {
+            exclude module: "spring"
+        }
+        compile project(":thesis-interface")
     }
 }
