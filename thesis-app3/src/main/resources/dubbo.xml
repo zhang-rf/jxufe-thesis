@@ -7,6 +7,7 @@
 
     <dubbo:application name="thesis-app3"/>
     <dubbo:registry address="zookeeper://localhost:2181"/>
+    <dubbo:monitor protocol="registry"/>
 
     <dubbo:reference id="service1" interface="cn.jxufe.app1.dubbo.Service1"/>
     <dubbo:reference id="service2" interface="cn.jxufe.app2.dubbo.Service2"/>

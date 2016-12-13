@@ -3,13 +3,6 @@ buildscript {
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
-        maven {
-            credentials {
-                username "albus"
-                password "YouCantHitMe"
-            }
-            url "http://139.196.34.70:8081/content/groups/public/"
-        }
         mavenCentral()
     }
 
@@ -20,40 +13,25 @@ buildscript {
 
 allprojects {
     group "cn.jxufe"
-    version "1.0-SNAPSHOT"
+    version "1.0-RELEASE"
 }
 
 subprojects {
     apply plugin: "java"
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     repositories {
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
-        maven {
-            credentials {
-                username "albus"
-                password "YouCantHitMe"
-            }
-            url "http://139.196.34.70:8081/content/groups/public/"
-        }
         mavenCentral()
     }
 
-    compileJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-        options.encoding = "UTF-8"
-    }
-
-    compileTestJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-        options.encoding = 'UTF-8'
-    }
 }
 
-configure([project("thesis-app1"), project("thesis-app2"), project("thesis-app3")]) {
+configure(subprojects.findAll { it.name.startsWith("thesis-app") && !it.name.endsWith("dubbo") }) {
     apply plugin: "org.springframework.boot"
 
     dependencies {
@@ -66,6 +44,7 @@ configure([project("thesis-app1"), project("thesis-app2"), project("thesis-app3"
         compile("com.github.sgroschupf:zkclient:0.1") {
             exclude module: "jmxtools"
             exclude module: "jmxri"
+            exclude module: "jms"
         }
     }
 }
