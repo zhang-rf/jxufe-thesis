@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="thesis-app3"/>
+    <dubbo:registry address="zookeeper://localhost:2181"/>
+
+    <dubbo:reference id="service1" interface="cn.jxufe.app1.dubbo.Service1"/>
+    <dubbo:reference id="service2" interface="cn.jxufe.app2.dubbo.Service2"/>
+</beans>
