@@ -28,10 +28,9 @@ subprojects {
         }
         mavenCentral()
     }
-
 }
 
-configure(subprojects.findAll { it.name.startsWith("thesis-app") && !it.name.endsWith("dubbo") }) {
+configure(subprojects.findAll { it.name.matches("thesis-app\\d+") }) {
     apply plugin: "org.springframework.boot"
 
     dependencies {

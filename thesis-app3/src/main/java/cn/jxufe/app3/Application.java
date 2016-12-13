@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource("classpath:dubbo.xml")
+@ImportResource("dubbo.xml")
 public class Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);

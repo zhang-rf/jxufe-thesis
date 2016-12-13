@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
-@ImportResource("classpath:dubbo.xml")
+@ImportResource("dubbo.xml")
 public class Application {
 
     public static void main(String[] args) throws InterruptedException {
