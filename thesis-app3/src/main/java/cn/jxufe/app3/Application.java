@@ -1,7 +1,6 @@
 package cn.jxufe.app3;
 
-import cn.jxufe.app1.dubbo.Service1;
-import cn.jxufe.app2.dubbo.Service2;
+import cn.jxufe.center.dubbo.Center;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +17,9 @@ public class Application {
     public static void main(String[] args) throws InterruptedException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Application.class, args);
 
-        Service1 service1 = applicationContext.getBean(Service1.class);
-        LOGGER.info(service1.invoke());
-        Service2 service2 = applicationContext.getBean(Service2.class);
-        LOGGER.info(service2.invoke());
+        Center center = applicationContext.getBean(Center.class);
+        LOGGER.info(String.valueOf(center.list().size()));
+        LOGGER.info(String.valueOf(center.invoke("app1")));
+        LOGGER.info(String.valueOf(center.invoke("app2")));
     }
 }

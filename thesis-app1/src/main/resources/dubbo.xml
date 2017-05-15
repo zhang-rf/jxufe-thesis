@@ -7,7 +7,9 @@
 
     <dubbo:application name="thesis-app1"/>
     <dubbo:registry address="zookeeper://localhost:2181"/>
-    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:protocol name="dubbo" port="20881" serialization="json"/>
     <dubbo:annotation package="cn.jxufe.app1.dubbo"/>
     <dubbo:monitor protocol="registry"/>
+
+    <dubbo:reference id="center" interface="cn.jxufe.center.dubbo.Center"/>
 </beans>

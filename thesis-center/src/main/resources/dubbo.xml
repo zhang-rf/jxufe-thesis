@@ -5,11 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="thesis-app2"/>
+    <dubbo:application name="thesis-center"/>
     <dubbo:registry address="zookeeper://localhost:2181"/>
-    <dubbo:protocol name="dubbo" port="20882" serialization="json"/>
-    <dubbo:annotation package="cn.jxufe.app2.dubbo"/>
+    <dubbo:protocol name="dubbo" port="20880" serialization="json"/>
+    <dubbo:annotation package="cn.jxufe.center.dubbo"/>
     <dubbo:monitor protocol="registry"/>
 
-    <dubbo:reference id="center" interface="cn.jxufe.center.dubbo.Center"/>
+    <dubbo:reference id="app" interface="cn.jxufe.app.dubbo.App" loadbalance="roundrobin"/>
 </beans>

@@ -1,7 +1,8 @@
 rootProject.name = 'jxufe-thesis'
 
 include "thesis-app1"
-include "thesis-app1-dubbo"
 include "thesis-app2"
-include "thesis-app2-dubbo"
 include 'thesis-app3'
+include "thesis-app-dubbo"
+include "thesis-center"
+include "thesis-center-dubbo"

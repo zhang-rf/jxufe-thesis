@@ -13,7 +13,7 @@ buildscript {
 
 allprojects {
     group "cn.jxufe"
-    version "1.0-RELEASE"
+    version "2.0-RELEASE"
 }
 
 subprojects {
@@ -30,10 +30,13 @@ subprojects {
     }
 }
 
-configure(subprojects.findAll { it.name.matches("thesis-app\\d+") }) {
+configure(subprojects.findAll { it.name.matches("thesis-(app\\d+|center)") }) {
     apply plugin: "org.springframework.boot"
 
     dependencies {
+        compile project(":thesis-center-dubbo")
+        compile project(":thesis-app-dubbo")
+
         compile "org.springframework.boot:spring-boot-starter"
         testCompile "org.springframework.boot:spring-boot-starter-test"
 
@@ -45,24 +48,5 @@ configure(subprojects.findAll { it.name.matches("thesis-app\\d+") }) {
             exclude module: "jmxri"
             exclude module: "jms"
         }
-    }
-}
-
-project("thesis-app1") {
-    dependencies {
-        compile project(":thesis-app1-dubbo")
-    }
-}
-
-project("thesis-app2") {
-    dependencies {
-        compile project(":thesis-app2-dubbo")
-    }
-}
-
-project("thesis-app3") {
-    dependencies {
-        compile project(":thesis-app1-dubbo")
-        compile project(":thesis-app2-dubbo")
     }
 }
