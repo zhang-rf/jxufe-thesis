@@ -6,14 +6,15 @@ import cn.jxufe.center.ApplicationContextUtil;
 import cn.jxufe.center.dubbo.Center;
 import com.alibaba.dubbo.config.annotation.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 @Service
 public class CenterImpl implements Center {
 
-    private List<String> tagList = new CopyOnWriteArrayList<>();
+    private Set<String> tagList = new CopyOnWriteArraySet<>();
 
     @Override
     public void register(String tag) {
@@ -27,15 +28,21 @@ public class CenterImpl implements Center {
 
     @Override
     public List<String> list() {
-        return Collections.unmodifiableList(tagList);
+        return new ArrayList<>(tagList);
     }
 
     @Override
     public Object invoke(String tag, Object... args) {
         AppResponse response;
+        int retry = 0;
         do {
+            retry++;
             response = ApplicationContextUtil.getContext().getBean(App.class).invoke(args);
-        } while (!response.getTag().equals(tag));
+        } while (!response.getTag().equals(tag) && retry < tagList.size());
+        if (!response.getTag().equals(tag)) {
+            unregister(tag);
+            return new Exception(tag + " Unavailable");
+        }
         return response.getResult();
     }
 }

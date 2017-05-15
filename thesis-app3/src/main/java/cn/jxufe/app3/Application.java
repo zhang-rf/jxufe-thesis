@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 @ImportResource("dubbo.xml")
 public class Application {
@@ -18,8 +20,9 @@ public class Application {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Application.class, args);
 
         Center center = applicationContext.getBean(Center.class);
-        LOGGER.info(String.valueOf(center.list().size()));
-        LOGGER.info(String.valueOf(center.invoke("app1")));
-        LOGGER.info(String.valueOf(center.invoke("app2")));
+        LOGGER.info(String.valueOf("Apps: " + Arrays.toString(center.list().toArray())));
+        LOGGER.info(String.valueOf(center.invoke("app1", "arg1")));
+        LOGGER.info(String.valueOf(center.invoke("app2", "arg2")));
+        LOGGER.info(String.valueOf(center.invoke("app3", "arg3")));
     }
 }
